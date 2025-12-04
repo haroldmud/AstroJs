@@ -1,0 +1,33 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import LanguagePicker from '../../components/LanguagePicker.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+export async function getStaticPaths() {
+  return [
+    { params: { locale: 'en' } },
+    { params: { locale: 'de' } },
+  ];
+}
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<>
+		<h1>Astro</h1>
+		<ul>
+			<li><a href={`/${lang}/home/`}>{t('nav.home')}</a></li>
+			<li><a href={`/${lang}/about/`}>{t('nav.hello')}</a></li>
+			<li><a href="https://twitter.com/astrodotbuild">{t('nav.twitter')}</a></li>
+		</ul>
+		<LanguagePicker />
+	</body>
+</html>

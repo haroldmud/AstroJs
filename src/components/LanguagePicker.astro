@@ -1,0 +1,14 @@
+---
+import { languages } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+
+const route = getLangFromUrl(Astro.url);
+console.log(route) // prints en when my url finishes with en and de when it finishes with de
+---
+
+<ul>
+    <li>
+      <a href="/">English</a> 
+    </li>
+    <a href="/de">German</a>
+</ul>
