@@ -1,14 +1,25 @@
 ---
-import { languages } from '../i18n/ui';
 import { getLangFromUrl } from '../i18n/utils';
+import { defaultLang, languages } from '../i18n/ui';
 
-const route = getLangFromUrl(Astro.url);
-console.log(route) // prints en when my url finishes with en and de when it finishes with de
+const currentLang = getLangFromUrl(Astro.url);
+const pathParts = Astro.url.pathname.split('/').filter(Boolean);
+
+// Remove the current locale from the path, if present
+const currentPath = languages[currentLang] ? pathParts.slice(1).join('/') : pathParts.join('/');
 ---
 
 <ul>
-    <li>
-      <a href="/">English</a> 
-    </li>
-    <a href="/de">German</a>
+  {Object.entries(languages).map(([lang, label]) => {
+    // Build the correct href
+    const href = lang === defaultLang
+      ? `/${currentPath}` // default lang → no prefix
+      : `/${lang}/${currentPath}`; // other langs → prefixed
+
+    return (
+      <li>
+        <a href={href}>{label}</a>
+      </li>
+    );
+  })}
 </ul>

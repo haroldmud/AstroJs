@@ -8,6 +8,10 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     return context.rewrite('/en');
   }
 
+  if(url.pathname === '/about') {
+    return context.rewrite('en/about')
+  }
+
   return next();
 };
 

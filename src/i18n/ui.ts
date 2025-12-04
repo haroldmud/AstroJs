@@ -1,3 +1,6 @@
+import en from './locales/en.json';
+import de from './locales/de.json'
+
 export const languages = {
   en: 'English',
   de: 'German',
@@ -6,13 +9,6 @@ export const languages = {
 export const defaultLang = 'en';
 
 export const ui = {
-  en: {
-    'nav.home': 'Home',
-    'nav.hello': 'Hello',
-    'nav.twitter': 'Twitter',
-  },
-  de: {
-    'nav.home': 'Start',
-    'nav.hello': 'Hallo',
-  },
+  en,
+  de
 } as const;
