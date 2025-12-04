@@ -6,20 +6,25 @@ const currentLang = getLangFromUrl(Astro.url);
 const pathParts = Astro.url.pathname.split('/').filter(Boolean);
 
 // Remove the current locale from the path, if present
-const currentPath = languages[currentLang] ? pathParts.slice(1).join('/') : pathParts.join('/');
+const currentPath = languages[currentLang]
+  ? pathParts.slice(1).join('/')
+  : pathParts.join('/');
 ---
+<div class="relative w-fit rounded-[10px] bg-[#ffffff1e] px-[0.15rem]">
+  <div class="flex w-fit h-fit p-[0.1rem] gap-2">
+    {Object.entries(languages).map(([lang, label]) => {
+      const href = lang === defaultLang
+        ? `/${currentPath}`
+        : `/${lang}/${currentPath}`;
 
-<ul>
-  {Object.entries(languages).map(([lang, label]) => {
-    // Build the correct href
-    const href = lang === defaultLang
-      ? `/${currentPath}` // default lang → no prefix
-      : `/${lang}/${currentPath}`; // other langs → prefixed
+      const isActive = lang === currentLang;
 
-    return (
-      <li>
-        <a href={href}>{label}</a>
-      </li>
-    );
-  })}
-</ul>
+      return (
+        <a class={`px-3 py-1 text-xl rounded-[10px] text-gray-100 ${
+          isActive ? 'bg-green-300' : 'bg-none'
+        }`} href={href}>{lang.toUpperCase()}</a>
+      );
+    })}
+    <div class="bg-green-500 w-4 h-4 border"></div>
+  </div>
+</div>

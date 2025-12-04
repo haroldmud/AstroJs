@@ -1,6 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import LanguagePicker from '../../components/LanguagePicker.astro';
+import BaseLayout from '../../Layout/BaseLayout.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -12,8 +13,8 @@ export async function getStaticPaths() {
   ];
 }
 ---
-
-<h1>{t('nav.about')}</h1>
-<p>{t('nav.hello')}</p>
-
-<LanguagePicker />
+<BaseLayout>
+  <h1>{t('nav.about')}</h1>
+  <p>{t('nav.hello')}</p>
+  <LanguagePicker />
+</BaseLayout>
