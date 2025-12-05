@@ -1,6 +1,11 @@
 {
-  "nav.home": "Home",
-  "nav.hello": "Hello",
-  "nav.twitter": "Twitter",
-  "nav.about": "about"
+  "site": {
+    "title": "My Awesome Website"
+  },
+  "nav": {
+    "home": "Home",
+    "hello": "Hello",
+    "twitter": "Twitter",
+    "about": "about"
+  }
 }

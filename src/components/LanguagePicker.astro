@@ -31,7 +31,7 @@ const animationClass = activeIndex === 0 ? "slide-left" : "slide-right";
   }
 </style>
 
-<div class="w-fit rounded-[10px] bg-[#ffffff1e] px-[0.15rem]">
+<div class="w-fit rounded-[5px] bg-[#ffffff1e] px-[0.15rem]">
   <div class="relative flex w-fit h-fit gap-2">
 
     {Object.entries(languages).map(([lang, label]) => {
@@ -41,7 +41,7 @@ const animationClass = activeIndex === 0 ? "slide-left" : "slide-right";
 
       return (
         <a
-          class="px-3 py-1 text-xl z-50 rounded-[10px] text-gray-100"
+          class="px-3 py-1 text-xl z-50 rounded-[5px] text-gray-700"
           href={href}
         >
           {lang.toUpperCase()}
@@ -50,7 +50,7 @@ const animationClass = activeIndex === 0 ? "slide-left" : "slide-right";
     })}
 
     <div
-      class={`absolute top-0 h-full w-[calc(100%/2)] border-2 border-transparent bg-clip-padding bg-green-500 rounded-[10px] ${animationClass}`}
+      class={`absolute top-0 h-full w-[calc(100%/2)] border-2 border-transparent bg-clip-padding bg-green-500 rounded-[5px] ${animationClass}`}
     ></div>
 
   </div>

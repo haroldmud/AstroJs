@@ -1,8 +1,17 @@
 ---
 import "../styles/global.css"
 import { getLangFromUrl } from "../i18n/utils"
+import { useTranslations } from "../i18n/utils"
+
+export async function getStaticPaths() {
+  return [
+    { params: { locale: 'en' } },
+    { params: { locale: 'de' } },
+  ];
+}
 
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <html lang={lang}>
@@ -10,10 +19,10 @@ const lang = getLangFromUrl(Astro.url);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content={Astro.generator} />
-    <title>My Awesome Website</title>
+    <title>{t('site.title')}</title>
   </head>
   <body class="bg-gray-700">
     <h1>Here we go</h1>
-    <slot>
+    <slot />
   </body>
 </html>

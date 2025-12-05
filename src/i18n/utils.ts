@@ -7,9 +7,17 @@ export function getLangFromUrl(url: URL) {
 }
 
 export function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof typeof ui[typeof defaultLang]) {
-    return key in ui[lang] ? (ui[lang] as any)[key] : ui[defaultLang][key];
-  }
+  return function t(key: string) {
+    const getNested = (obj: any, path: string) =>
+      path.split('.').reduce((acc, part) => acc?.[part], obj);
+
+    return (
+      getNested(ui[lang], key) ??
+      getNested(ui[defaultLang], key) ??
+      key
+    );
+  };
 }
+
 
 

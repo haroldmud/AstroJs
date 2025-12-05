@@ -1,5 +1,10 @@
 {
-    "nav.home": "Start",
-    "nav.hello": "Hallo",
-    "nav.about": "Über"
+  "site": {
+    "title": "Meine großartige Webseite"
+  },
+  "nav": {
+    "home": "Start",
+    "hello": "Hallo",
+    "about": "Über"
+  }
 }
