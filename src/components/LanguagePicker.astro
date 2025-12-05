@@ -5,26 +5,53 @@ import { defaultLang, languages } from '../i18n/ui';
 const currentLang = getLangFromUrl(Astro.url);
 const pathParts = Astro.url.pathname.split('/').filter(Boolean);
 
-// Remove the current locale from the path, if present
 const currentPath = languages[currentLang]
   ? pathParts.slice(1).join('/')
   : pathParts.join('/');
+
+const langKeys = Object.keys(languages);
+const activeIndex = langKeys.indexOf(currentLang);
+
+const animationClass = activeIndex === 0 ? "slide-left" : "slide-right";
 ---
-<div class="relative w-fit rounded-[10px] bg-[#ffffff1e] px-[0.15rem]">
-  <div class="flex w-fit h-fit p-[0.1rem] gap-2">
+<style>
+  .slide-left {
+    animation: slideLeft 0.25s ease forwards;
+  }
+  .slide-right {
+    animation: slideRight 0.25s ease forwards;
+  }
+  @keyframes slideLeft {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0%); }
+  }
+  @keyframes slideRight {
+    from { transform: translateX(0%); }
+    to   { transform: translateX(100%); }
+  }
+</style>
+
+<div class="w-fit rounded-[10px] bg-[#ffffff1e] px-[0.15rem]">
+  <div class="relative flex w-fit h-fit gap-2">
+
     {Object.entries(languages).map(([lang, label]) => {
       const href = lang === defaultLang
         ? `/${currentPath}`
         : `/${lang}/${currentPath}`;
 
-      const isActive = lang === currentLang;
-
       return (
-        <a class={`px-3 py-1 text-xl rounded-[10px] text-gray-100 ${
-          isActive ? 'bg-green-300' : 'bg-none'
-        }`} href={href}>{lang.toUpperCase()}</a>
+        <a
+          class="px-3 py-1 text-xl z-50 rounded-[10px] text-gray-100"
+          href={href}
+        >
+          {lang.toUpperCase()}
+        </a>
       );
     })}
-    <div class="bg-green-500 w-4 h-4 border"></div>
+
+    <div
+      class={`absolute top-0 h-full w-[calc(100%/2)] border-2 border-transparent bg-clip-padding bg-green-500 rounded-[10px] ${animationClass}`}
+    ></div>
+
   </div>
 </div>
